@@ -32,7 +32,7 @@ import 'package:meta/meta.dart';
 import 'package:plain_optional/plain_optional.dart';
 import 'package:yaml/yaml.dart';
 
-import '../pubspec_yaml.dart';
+import '../pubspec_yaml_2.dart';
 import 'package_dependency_spec/package_dependency_spec.dart';
 import 'package_dependency_spec/serializers.dart';
 

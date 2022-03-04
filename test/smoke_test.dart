@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:pubspec_yaml/pubspec_yaml.dart';
+import 'package:pubspec_yaml_2/pubspec_yaml_2.dart';
 import 'package:test/test.dart';
 
 void main() {

@@ -22,7 +22,7 @@
  * SOFTWARE.
  * */
 
-import 'package:pubspec_yaml/src/pubspec_yaml.dart';
+import 'package:pubspec_yaml_2/src/pubspec_yaml.dart';
 import 'package:test/test.dart';
 
 void main() {

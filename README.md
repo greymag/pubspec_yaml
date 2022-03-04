@@ -1,6 +1,10 @@
-# pubspec_yaml [![Build Status](https://travis-ci.org/alexei-sintotski/pubspec_yaml.svg?branch=master)](https://travis-ci.org/alexei-sintotski/pubspec_yaml) [![codecov](https://codecov.io/gh/alexei-sintotski/pubspec_yaml/branch/master/graph/badge.svg)](https://codecov.io/gh/alexei-sintotski/pubspec_yaml) [![pubspec_lock version](https://img.shields.io/pub/v/pubspec_yaml?label=pubspec_yaml)](https://pub.dev/packages/pubspec_yaml)
+# pubspec_yaml_2
 
-Dart library to access and manipulate content of pubpec.yaml files
+[![pub package](https://img.shields.io/pub/v/pubspec_yaml_2)](https://pub.dev/packages/pubspec_yaml_2)
+
+Dart library to access and manipulate content of pubpec.yaml files.
+
+Fork [pubspec_yaml](https://github.com/alexei-sintotski/pubspec_yaml).
 
 ## Class PubspecYaml
 

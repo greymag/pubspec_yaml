@@ -5,5 +5,5 @@ environment:
   sdk: ">=2.5.0 <3.0.0"
 
 dependencies:
-  pubspec_yaml:
+  pubspec_yaml_2:
     path: ..
