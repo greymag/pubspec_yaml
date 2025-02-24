@@ -23,8 +23,6 @@
  *
  */
 
-library pubspec_yaml;
-
 export 'src/git_package_dependency_spec/git_package_dependency_spec.dart';
 export 'src/hosted_package_dependency_spec/hosted_package_dependency_spec.dart';
 export 'src/package_dependency_spec/package_dependency_spec.dart';

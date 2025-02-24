@@ -212,13 +212,13 @@ Map<String, dynamic> _dependenciesToJson(
           for (final dep
               in dependencies.toList()
                 ..sort((a, b) => a.package().compareTo(b.package())))
-            ...dep.toJson()
-        }
+            ...dep.toJson(),
+        },
     };
 
 Map<String, dynamic> _environmentToJson(Map<String, String> environment) =>
     <String, dynamic>{
-      if (environment.isNotEmpty) _Tokens.environment: environment
+      if (environment.isNotEmpty) _Tokens.environment: environment,
     };
 
 Map<String, dynamic> _executablesToJson(
@@ -229,7 +229,7 @@ Map<String, dynamic> _executablesToJson(
         _Tokens.executables: <String, dynamic>{
           for (final entry in executables.entries)
             entry.key: _nullIfEmpty(entry.value.valueOr(() => '')),
-        }
+        },
     };
 
 PubspecYaml _loadFromYaml(String content) {
@@ -243,7 +243,7 @@ PubspecYaml _loadFromYaml(String content) {
       if (jsonMap[_Tokens.author] != null) jsonMap[_Tokens.author] as String,
       if (jsonMap[_Tokens.authors] != null)
         ...(jsonMap[_Tokens.authors] as List<dynamic>)
-            .map((dynamic author) => author as String)
+            .map((dynamic author) => author as String),
     ],
     homepage: Optional(jsonMap[_Tokens.homepage] as String?),
     repository: Optional(jsonMap[_Tokens.repository] as String?),
@@ -271,23 +271,28 @@ PubspecYaml _loadFromYaml(String content) {
 }
 
 Iterable<PackageDependencySpec> _loadDependencies(
-        Map<String, dynamic> jsonMap, String key) =>
+  Map<String, dynamic> jsonMap,
+  String key,
+) =>
     [
       if (jsonMap.containsKey(key) && jsonMap[key] != null)
         ...(jsonMap[key] as Map<String, dynamic>)
             .entries
-            .map(loadPackageDependencySpec)
+            .map(loadPackageDependencySpec),
     ];
 
 Map<String, String> _loadEnvironment(Map<String, dynamic> environment) =>
     environment.map((key, dynamic value) => MapEntry(key, value as String));
 
 Map<String, Optional<String>> _loadExecutables(
-        Map<String, dynamic> executables) =>
-    executables.map((key, dynamic value) => MapEntry(
-          key,
-          Optional(value as String?),
-        ));
+  Map<String, dynamic> executables,
+) =>
+    executables.map(
+      (key, dynamic value) => MapEntry(
+        key,
+        Optional(value as String?),
+      ),
+    );
 
 const _knownTokens = [
   _Tokens.name,

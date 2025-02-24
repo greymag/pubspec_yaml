@@ -124,11 +124,12 @@ void main() {
     group('$PubspecYaml.loadFromYamlString', () {
       test('produces object with correct path', () {
         expect(
-            pubspecYaml.dependencies.first.iswitcho(
-              git: (p) => p.path.valueOr(() => ''),
-              otherwise: () => '',
-            ),
-            path);
+          pubspecYaml.dependencies.first.iswitcho(
+            git: (p) => p.path.valueOr(() => ''),
+            otherwise: () => '',
+          ),
+          path,
+        );
       });
       test('produces object without ref', () {
         expect(

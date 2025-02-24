@@ -1,6 +1,7 @@
 # pubspec_yaml_2
 
 [![pub package](https://img.shields.io/pub/v/pubspec_yaml_2)](https://pub.dev/packages/pubspec_yaml_2)
+[![innim lint](https://img.shields.io/badge/style-innim_lint-40c4ff.svg)](https://pub.dev/packages/innim_lint)
 
 Dart library to access and manipulate content of pubpec.yaml files.
 

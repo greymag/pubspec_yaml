@@ -39,7 +39,9 @@ GitPackageDependencySpec loadGitPackageDependencySpec(
     return _loadFromSimpleGitDependencyDefinition(package, definition);
   } else {
     return _loadFromDetailedGitDependencyDefinition(
-        package, definition as Map<String, dynamic>);
+      package,
+      definition as Map<String, dynamic>,
+    );
   }
 }
 

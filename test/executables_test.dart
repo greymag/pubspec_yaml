@@ -37,7 +37,7 @@ void main() {
       test('produces object containing correct executable names', () {
         expect(pubspec.executables.keys, [
           executableWithCustomScriptName,
-          executableWithoutCustomScriptName
+          executableWithoutCustomScriptName,
         ]);
       });
       test(
