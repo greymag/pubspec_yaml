@@ -1,3 +1,4 @@
+## [3.3.0] - Update dependencies, fix exception.
 
 * Update dependencies and supported SDK version.
 * Don't fail if hosted dependency doesn't have a name (incorrectly formatted pubspec.yaml).
