@@ -2,6 +2,8 @@ name: pubspec_yaml_2
 description: Dart library to access and manipulate content of pubspec.yaml files
 version: 3.3.0
 homepage: https://github.com/greymag/pubspec_yaml
+repository: https://github.com/greymag/pubspec_yaml
+issue_tracker: https://github.com/greymag/pubspec_yaml/issues
 
 environment:
   sdk: '>=2.12.0 <4.0.0'
