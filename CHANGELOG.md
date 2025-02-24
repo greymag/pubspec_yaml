@@ -1,3 +1,5 @@
+
+* Update dependencies and supported SDK version.
 ## [3.2.0] - Support short format for hosted dependencies
 
 * Support for new (Dart 2.15 and later) format of defining hosted dependencies.
