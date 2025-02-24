@@ -77,7 +77,7 @@ HostedPackageDependencySpec _loadGenericHostedDependency(
   final String? name;
   final String? url;
   if (definitionBody is Map<String, dynamic>) {
-    name = definitionBody[_Tokens.name] as String;
+    name = definitionBody[_Tokens.name] as String?;
     url = definitionBody[_Tokens.url] as String?;
   } else {
     url = definitionBody as String;

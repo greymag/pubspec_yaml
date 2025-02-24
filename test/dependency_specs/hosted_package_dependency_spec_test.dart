@@ -186,7 +186,47 @@ void main() {
   });
 
   group(
-      'given pubspec.yaml with dependency hosted in shot format '
+      'given pubspec.yaml with dependency hosted elsewhere '
+      'with version without name spec', () {
+    final pubspec = PubspecYaml.loadFromYamlString(
+      pubspecWithPackageHostedElsewhereWithVersionWithoutNameSpec,
+    );
+
+    group('$PubspecYaml.loadFromYamlString', () {
+      test('produces object with defined version', () {
+        expect(
+          pubspec.dependencies.first.iswitcho(
+            hosted: (p) => p.version.hasValue,
+            otherwise: () => false,
+          ),
+          isTrue,
+        );
+      });
+
+      test('produces object with correct version specification', () {
+        expect(
+          pubspec.dependencies.first.iswitcho(
+            hosted: (p) => p.version.valueOr(() => ''),
+            otherwise: () => '',
+          ),
+          version,
+        );
+      });
+    });
+
+    group('$PubspecYaml.toYamlString', () {
+      // this is not correct format for input, so we fix it in the output
+      test('produces correct string with short notation', () {
+        expect(
+          pubspec.toYamlString(),
+          pubspecWithPackageHostedShortFormatWithVersionSpec,
+        );
+      });
+    });
+  });
+
+  group(
+      'given pubspec.yaml with dependency hosted in short format '
       'with version spec', () {
     final pubspec = PubspecYaml.loadFromYamlString(
       pubspecWithPackageHostedShortFormatWithVersionSpec,
@@ -260,6 +300,16 @@ dependencies:
   $dependency:
     hosted:
       name: $name
+      url: $url
+    version: $version
+''';
+
+const pubspecWithPackageHostedElsewhereWithVersionWithoutNameSpec = '''
+name: pubspec_yaml
+
+dependencies:
+  $dependency:
+    hosted:
       url: $url
     version: $version
 ''';

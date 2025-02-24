@@ -1,5 +1,6 @@
 
 * Update dependencies and supported SDK version.
+* Don't fail if hosted dependency doesn't have a name (incorrectly formatted pubspec.yaml).
 * Use `innim_lint` as set of lints.
 
 ## [3.2.0] - Support short format for hosted dependencies
