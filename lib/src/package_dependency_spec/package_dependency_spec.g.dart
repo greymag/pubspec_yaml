@@ -6,6 +6,7 @@ part of 'package_dependency_spec.dart';
 // SumTypesGenerator
 // **************************************************************************
 
+// ignore_for_file: unused_element
 abstract class _$PackageDependencySpec {
   const _$PackageDependencySpec({
     this.sdk,
@@ -51,17 +52,14 @@ abstract class _$PackageDependencySpec {
       GitPackageDependencySpec? git,
       PathPackageDependencySpec? path,
       HostedPackageDependencySpec? hosted,
-    })
-        make,
-  ) {
-    return iswitch(
-      sdk: (sdk) => make(sdk: sdk),
-      git: (git) => make(git: git),
-      path: (path) => make(path: path),
-      hosted: (hosted) => make(hosted: hosted),
-    );
-  }
-
+    }) make,
+  ) =>
+      iswitch(
+        sdk: (sdk) => make(sdk: sdk),
+        git: (git) => make(git: git),
+        path: (path) => make(path: path),
+        hosted: (hosted) => make(hosted: hosted),
+      );
   $T iswitch<$T>({
     required $T Function(SdkPackageDependencySpec) sdk,
     required $T Function(GitPackageDependencySpec) git,
@@ -83,11 +81,11 @@ abstract class _$PackageDependencySpec {
   }
 
   $T iswitcho<$T>({
+    required $T Function() otherwise,
     $T Function(SdkPackageDependencySpec)? sdk,
     $T Function(GitPackageDependencySpec)? git,
     $T Function(PathPackageDependencySpec)? path,
     $T Function(HostedPackageDependencySpec)? hosted,
-    required $T Function() otherwise,
   }) {
     $T _otherwise(Object? _) => otherwise();
     return iswitch(
@@ -100,15 +98,14 @@ abstract class _$PackageDependencySpec {
 
   @override
   bool operator ==(
-    dynamic other,
-  ) {
-    return other.runtimeType == runtimeType &&
-        other.sdk == sdk &&
-        other.git == git &&
-        other.path == path &&
-        other.hosted == hosted;
-  }
-
+    Object other,
+  ) =>
+      other.runtimeType == runtimeType &&
+      other is PackageDependencySpec &&
+      other.sdk == sdk &&
+      other.git == git &&
+      other.path == path &&
+      other.hosted == hosted;
   @override
   int get hashCode {
     var result = 17;
