@@ -23,8 +23,7 @@
  *
  */
 
-import 'package:plain_optional/plain_optional.dart';
-
+import '../utils/optional.dart';
 import 'git_package_dependency_spec.dart';
 
 // ignore_for_file: avoid_as
@@ -72,8 +71,8 @@ GitPackageDependencySpec _loadFromDetailedGitDependencyDefinition(
     GitPackageDependencySpec(
       package: package,
       url: definition[_Tokens.url] as String,
-      ref: Optional(definition[_Tokens.ref] as String?),
-      path: Optional(definition[_Tokens.path] as String?),
+      ref: definition.getOptional(_Tokens.ref),
+      path: definition.getOptional(_Tokens.path),
     );
 
 class _Tokens {

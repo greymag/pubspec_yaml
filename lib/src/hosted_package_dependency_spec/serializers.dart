@@ -26,8 +26,7 @@
 // ignore_for_file: avoid_as
 // ignore_for_file: public_member_api_docs
 
-import 'package:plain_optional/plain_optional.dart';
-
+import '../utils/optional.dart';
 import 'hosted_package_dependency_spec.dart';
 
 extension HostedPackageDependencySpecToJson on HostedPackageDependencySpec {
@@ -66,7 +65,7 @@ HostedPackageDependencySpec _loadPubDevHostedDependency(
 ) =>
     HostedPackageDependencySpec(
       package: package,
-      version: Optional(definition),
+      version: Optional.notNull(definition),
     );
 
 HostedPackageDependencySpec _loadGenericHostedDependency(
@@ -86,9 +85,9 @@ HostedPackageDependencySpec _loadGenericHostedDependency(
 
   return HostedPackageDependencySpec(
     package: package,
-    version: Optional(definition[_Tokens.version] as String?),
-    name: Optional(name),
-    url: Optional(url),
+    version: definition.getOptional(_Tokens.version),
+    name: Optional.notNull(name),
+    url: Optional.notNull(url),
   );
 }
 

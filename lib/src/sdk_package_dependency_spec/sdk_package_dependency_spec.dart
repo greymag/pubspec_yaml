@@ -25,7 +25,8 @@
 
 import 'package:functional_data/functional_data.dart';
 import 'package:meta/meta.dart';
-import 'package:plain_optional/plain_optional.dart';
+
+import '../utils/optional.dart';
 
 part 'sdk_package_dependency_spec.g.dart';
 

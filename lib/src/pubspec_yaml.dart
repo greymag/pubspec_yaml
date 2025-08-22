@@ -29,11 +29,9 @@ import 'package:collection/collection.dart';
 import 'package:functional_data/functional_data.dart';
 import 'package:json2yaml/json2yaml.dart';
 import 'package:meta/meta.dart';
-import 'package:plain_optional/plain_optional.dart';
 import 'package:yaml/yaml.dart';
 
 import '../pubspec_yaml_2.dart';
-import 'package_dependency_spec/package_dependency_spec.dart';
 import 'package_dependency_spec/serializers.dart';
 
 part 'pubspec_yaml.g.dart';
@@ -237,18 +235,19 @@ PubspecYaml _loadFromYaml(String content) {
       json.decode(json.encode(loadYaml(content))) as Map<String, dynamic>;
   return PubspecYaml(
     name: jsonMap[_Tokens.name] as String,
-    version: Optional(jsonMap[_Tokens.version] as String?),
-    description: Optional(jsonMap[_Tokens.description] as String?),
+    // version: Optional(jsonMap[_Tokens.version] as String?),
+    version: jsonMap.getOptional(_Tokens.version),
+    description: jsonMap.getOptional(_Tokens.description),
     authors: [
       if (jsonMap[_Tokens.author] != null) jsonMap[_Tokens.author] as String,
       if (jsonMap[_Tokens.authors] != null)
         ...(jsonMap[_Tokens.authors] as List<dynamic>)
             .map((dynamic author) => author as String),
     ],
-    homepage: Optional(jsonMap[_Tokens.homepage] as String?),
-    repository: Optional(jsonMap[_Tokens.repository] as String?),
-    issueTracker: Optional(jsonMap[_Tokens.issueTracker] as String?),
-    documentation: Optional(jsonMap[_Tokens.documentation] as String?),
+    homepage: jsonMap.getOptional(_Tokens.homepage),
+    repository: jsonMap.getOptional(_Tokens.repository),
+    issueTracker: jsonMap.getOptional(_Tokens.issueTracker),
+    documentation: jsonMap.getOptional(_Tokens.documentation),
     dependencies: _loadDependencies(jsonMap, _Tokens.dependencies),
     devDependencies: _loadDependencies(jsonMap, _Tokens.devDependencies),
     dependencyOverrides: _loadDependencies(
@@ -263,7 +262,7 @@ PubspecYaml _loadFromYaml(String content) {
             jsonMap[_Tokens.executables] != null
         ? _loadExecutables(jsonMap[_Tokens.executables] as Map<String, dynamic>)
         : {},
-    publishTo: Optional(jsonMap[_Tokens.publishTo] as String?),
+    publishTo: jsonMap.getOptional(_Tokens.publishTo),
     customFields: Map<String, dynamic>.fromEntries(
       jsonMap.entries.where((entry) => !_knownTokens.contains(entry.key)),
     ),
@@ -290,7 +289,7 @@ Map<String, Optional<String>> _loadExecutables(
     executables.map(
       (key, dynamic value) => MapEntry(
         key,
-        Optional(value as String?),
+        Optional.notNull(value as String?),
       ),
     );
 

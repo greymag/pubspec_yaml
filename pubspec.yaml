@@ -6,14 +6,13 @@ repository: https://github.com/greymag/pubspec_yaml
 issue_tracker: https://github.com/greymag/pubspec_yaml/issues
 
 environment:
-  sdk: '>=2.12.0 <4.0.0'
+  sdk: '>=2.14.0 <4.0.0'
 
 dependencies:
   collection: ^1.18.0
   functional_data: ^1.2.0
   json2yaml: ^3.0.1
   meta: ^1.7.0
-  plain_optional: ^1.0.0
   sum_types: ^0.4.0
   yaml: ^3.1.0
 

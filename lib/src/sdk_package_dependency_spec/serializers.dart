@@ -23,8 +23,7 @@
  *
  */
 
-import 'package:plain_optional/plain_optional.dart';
-
+import '../utils/optional.dart';
 import 'sdk_package_dependency_spec.dart';
 
 // ignore_for_file: avoid_as
@@ -46,7 +45,7 @@ SdkPackageDependencySpec loadSdkPackageDependencySpec(
   return SdkPackageDependencySpec(
     package: entry.key,
     sdk: definition[_Tokens.sdk] as String,
-    version: Optional(definition[_Tokens.version] as String?),
+    version: definition.getOptional(_Tokens.version),
   );
 }
 

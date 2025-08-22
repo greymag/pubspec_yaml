@@ -29,3 +29,4 @@ export 'src/package_dependency_spec/package_dependency_spec.dart';
 export 'src/path_package_dependency_spec/path_package_dependency_spec.dart';
 export 'src/pubspec_yaml.dart';
 export 'src/sdk_package_dependency_spec/sdk_package_dependency_spec.dart';
+export 'src/utils/optional.dart';
