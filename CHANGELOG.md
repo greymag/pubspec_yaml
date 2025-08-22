@@ -1,3 +1,7 @@
+## [4.0.0+1]
+
+* Actual minimum SDK version is 3.0.0 (not 2.14.0 as stated in 4.0.0), because of dependency on `sum_types` package.
+
 ## [4.0.0]
 
 * Added support for `workspace` and `resolution` fields (see https://dart.dev/tools/pub/workspaces).
