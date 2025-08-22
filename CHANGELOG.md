@@ -1,3 +1,22 @@
+## [4.0.0]
+
+* Added support for `workspace` and `resolution` fields (see https://dart.dev/tools/pub/workspaces).
+* Replaced `Optional<T>` with a custom implementation. The main API remains compatible, but some methods have been removed.
+* Minimum SDK version is now 2.14.0.
+
+This release marks the beginning of a migration to a new approach for handling optional fields.
+
+Previously, optional fields were either given default values (e.g., an empty list or map) or treated as non-existent if `null`. 
+Going forward, we now distinguish between three states for optional fields:
+- non-existing;
+- existing but empty (e.g., an empty list, map, or `null`);
+- existing with values.
+
+This change allows us to retain more precise information from the original `pubspec.yaml` file.
+
+The newly supported `workspace` and `resolution` fields already follow this approach.
+Other optional fields will be migrated in future releases.
+
 ## [3.3.0] - Update dependencies, fix exception.
 
 * Update dependencies and supported SDK version.
