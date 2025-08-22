@@ -23,6 +23,8 @@ abstract class $PubspecYaml {
   Iterable<PackageDependencySpec> get dependencyOverrides;
   Map<String, String> get environment;
   Map<String, Optional<String>> get executables;
+  Optional<String?> get resolution;
+  Iterable<String>? get workspace;
   Map<String, dynamic> get customFields;
 
   PubspecYaml copyWith({
@@ -40,6 +42,8 @@ abstract class $PubspecYaml {
     Iterable<PackageDependencySpec>? dependencyOverrides,
     Map<String, String>? environment,
     Map<String, Optional<String>>? executables,
+    Optional<String?>? resolution,
+    Iterable<String>? workspace,
     Map<String, dynamic>? customFields,
   }) =>
       PubspecYaml(
@@ -57,6 +61,8 @@ abstract class $PubspecYaml {
         dependencyOverrides: dependencyOverrides ?? this.dependencyOverrides,
         environment: environment ?? this.environment,
         executables: executables ?? this.executables,
+        resolution: resolution ?? this.resolution,
+        workspace: workspace ?? this.workspace,
         customFields: customFields ?? this.customFields,
       );
 
@@ -76,6 +82,8 @@ abstract class $PubspecYaml {
       this.dependencyOverrides,
       this.environment,
       this.executables,
+      this.resolution,
+      this.workspace,
       this.customFields,
     );
     mutator(change);
@@ -94,13 +102,15 @@ abstract class $PubspecYaml {
       dependencyOverrides: change.dependencyOverrides,
       environment: change.environment,
       executables: change.executables,
+      resolution: change.resolution,
+      workspace: change.workspace,
       customFields: change.customFields,
     );
   }
 
   @override
   String toString() =>
-      "PubspecYaml(name: $name, version: $version, description: $description, authors: $authors, homepage: $homepage, repository: $repository, issueTracker: $issueTracker, documentation: $documentation, publishTo: $publishTo, dependencies: $dependencies, devDependencies: $devDependencies, dependencyOverrides: $dependencyOverrides, environment: $environment, executables: $executables, customFields: $customFields)";
+      "PubspecYaml(name: $name, version: $version, description: $description, authors: $authors, homepage: $homepage, repository: $repository, issueTracker: $issueTracker, documentation: $documentation, publishTo: $publishTo, dependencies: $dependencies, devDependencies: $devDependencies, dependencyOverrides: $dependencyOverrides, environment: $environment, executables: $executables, resolution: $resolution, workspace: $workspace, customFields: $customFields)";
 
   @override
   // ignore: avoid_equals_and_hash_code_on_mutable_classes
@@ -123,6 +133,8 @@ abstract class $PubspecYaml {
           .equals(dependencyOverrides, other.dependencyOverrides) &&
       const DeepCollectionEquality().equals(environment, other.environment) &&
       const DeepCollectionEquality().equals(executables, other.executables) &&
+      resolution == other.resolution &&
+      const DeepCollectionEquality().equals(workspace, other.workspace) &&
       const DeepCollectionEquality().equals(customFields, other.customFields);
 
   @override
@@ -144,6 +156,8 @@ abstract class $PubspecYaml {
         37 * result + const DeepCollectionEquality().hash(dependencyOverrides);
     result = 37 * result + const DeepCollectionEquality().hash(environment);
     result = 37 * result + const DeepCollectionEquality().hash(executables);
+    result = 37 * result + resolution.hashCode;
+    result = 37 * result + const DeepCollectionEquality().hash(workspace);
     result = 37 * result + const DeepCollectionEquality().hash(customFields);
     return result;
   }
@@ -165,6 +179,8 @@ class PubspecYaml$Change {
     this.dependencyOverrides,
     this.environment,
     this.executables,
+    this.resolution,
+    this.workspace,
     this.customFields,
   );
 
@@ -182,6 +198,8 @@ class PubspecYaml$Change {
   Iterable<PackageDependencySpec> dependencyOverrides;
   Map<String, String> environment;
   Map<String, Optional<String>> executables;
+  Optional<String?> resolution;
+  Iterable<String>? workspace;
   Map<String, dynamic> customFields;
 }
 
@@ -273,21 +291,21 @@ class PubspecYaml$ {
         executablesContainer.copyWith(executables: executables),
   );
 
+  static final resolution = Lens<PubspecYaml, Optional<String?>>(
+    (resolutionContainer) => resolutionContainer.resolution,
+    (resolutionContainer, resolution) =>
+        resolutionContainer.copyWith(resolution: resolution),
+  );
+
+  static final workspace = Lens<PubspecYaml, Iterable<String>?>(
+    (workspaceContainer) => workspaceContainer.workspace,
+    (workspaceContainer, workspace) =>
+        workspaceContainer.copyWith(workspace: workspace),
+  );
+
   static final customFields = Lens<PubspecYaml, Map<String, dynamic>>(
     (customFieldsContainer) => customFieldsContainer.customFields,
     (customFieldsContainer, customFields) =>
         customFieldsContainer.copyWith(customFields: customFields),
   );
 }
-// ignore_for_file: always_put_required_named_parameters_first
-// ignore_for_file: avoid_annotating_with_dynamic
-// ignore_for_file: avoid_dynamic_calls
-// ignore_for_file: avoid_equals_and_hash_code_on_mutable_classes
-// ignore_for_file: duplicate_ignore
-// ignore_for_file: lines_longer_than_80_chars
-// ignore_for_file: prefer_asserts_with_message
-// ignore_for_file: prefer_expression_function_bodies
-// ignore_for_file: prefer_single_quotes
-// ignore_for_file: public_member_api_docs
-// ignore_for_file: unnecessary_this
-// ignore_for_file: unused_element

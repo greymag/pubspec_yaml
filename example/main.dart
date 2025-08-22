@@ -8,10 +8,10 @@ void main() {
   final pubspecYaml = File('pubspec.yaml').readAsStringSync().toPubspecYaml();
 
   final productionOverrides = pubspecYaml.dependencyOverrides.where(
-    (override) => pubspecYaml.dependencies.any((
-      productionDependency,
-    ) =>
-        productionDependency.package() == override.package()),
+    (override) => pubspecYaml.dependencies.any(
+      (productionDependency) =>
+          productionDependency.package() == override.package(),
+    ),
   );
 
   if (productionOverrides.isEmpty) {

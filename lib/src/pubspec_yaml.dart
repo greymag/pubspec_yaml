@@ -65,6 +65,8 @@ class PubspecYaml extends $PubspecYaml {
     this.dependencyOverrides = const [],
     this.environment = const {},
     this.executables = const {},
+    this.resolution = const Optional.none(),
+    this.workspace,
     this.customFields = const <String, dynamic>{},
   });
 
@@ -138,6 +140,15 @@ class PubspecYaml extends $PubspecYaml {
   @CustomEquality(DeepCollectionEquality())
   final Map<String, Optional<String>> executables;
 
+  /// Resolution strategy for dependencies
+  /// https://dart.dev/tools/pub/workspaces
+  final Optional<String?> resolution;
+
+  /// The paths to the packages of the repository (the workspace packages)
+  /// https://dart.dev/tools/pub/workspaces
+  @CustomEquality(DeepCollectionEquality())
+  final Iterable<String>? workspace;
+
   /// JSON representation of other pubspec.yaml fields
   @CustomEquality(DeepCollectionEquality())
   final Map<String, dynamic> customFields;
@@ -166,6 +177,8 @@ Map<String, dynamic> _pubspecYamlToJson(PubspecYaml pubspecYaml) =>
       ..._packageMetadataToJson(pubspecYaml),
       ..._executablesToJson(pubspecYaml.executables),
       ..._environmentToJson(pubspecYaml.environment),
+      ..._resolutionToJson(pubspecYaml.resolution),
+      ..._workspaceToJson(pubspecYaml.workspace),
       ..._dependenciesToJson(pubspecYaml.dependencies, _Tokens.dependencies),
       ..._dependenciesToJson(
         pubspecYaml.devDependencies,
@@ -219,6 +232,16 @@ Map<String, dynamic> _environmentToJson(Map<String, String> environment) =>
       if (environment.isNotEmpty) _Tokens.environment: environment,
     };
 
+Map<String, dynamic> _resolutionToJson(Optional<String?> resolution) =>
+    <String, dynamic>{
+      if (resolution.hasValue) _Tokens.resolution: resolution.valueOr(() => ''),
+    };
+
+Map<String, dynamic> _workspaceToJson(Iterable<String>? workspace) =>
+    <String, dynamic>{
+      if (workspace != null) _Tokens.workspace: workspace.toList(),
+    };
+
 Map<String, dynamic> _executablesToJson(
   Map<String, Optional<String>> executables,
 ) =>
@@ -257,17 +280,26 @@ PubspecYaml _loadFromYaml(String content) {
     environment: jsonMap.containsKey(_Tokens.environment) &&
             jsonMap[_Tokens.environment] != null
         ? _loadEnvironment(jsonMap[_Tokens.environment] as Map<String, dynamic>)
-        : {},
+        : const {},
     executables: jsonMap.containsKey(_Tokens.executables) &&
             jsonMap[_Tokens.executables] != null
         ? _loadExecutables(jsonMap[_Tokens.executables] as Map<String, dynamic>)
-        : {},
+        : const {},
     publishTo: jsonMap.getOptional(_Tokens.publishTo),
+    resolution: jsonMap.getOptional(_Tokens.resolution),
+    workspace: _loadIterable(jsonMap, _Tokens.workspace),
     customFields: Map<String, dynamic>.fromEntries(
       jsonMap.entries.where((entry) => !_knownTokens.contains(entry.key)),
     ),
   );
 }
+
+Iterable<T>? _loadIterable<T>(Map<String, dynamic> jsonMap, String key) =>
+    jsonMap.containsKey(key)
+        ? jsonMap[key] != null
+            ? (jsonMap[key] as List<dynamic>).cast<T>()
+            : const []
+        : null;
 
 Iterable<PackageDependencySpec> _loadDependencies(
   Map<String, dynamic> jsonMap,
@@ -309,6 +341,8 @@ const _knownTokens = [
   _Tokens.dependencyOverrides,
   _Tokens.environment,
   _Tokens.publishTo,
+  _Tokens.resolution,
+  _Tokens.workspace,
 ];
 
 class _Tokens {
@@ -327,6 +361,8 @@ class _Tokens {
   static const dependencyOverrides = 'dependency_overrides';
   static const environment = 'environment';
   static const publishTo = 'publish_to';
+  static const resolution = 'resolution';
+  static const workspace = 'workspace';
 }
 
 String? _nullIfEmpty(String s) => s.isEmpty ? null : s;
